@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Carapp",
-    "slug": "Carapp",
+    "name": "Karbon",
+    "slug": "Karbon",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,7 +16,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.quantumquill.carapp",
+      "package": "com.quantumquill.karbon",
       "googleServicesFile": "google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",

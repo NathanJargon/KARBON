@@ -4,7 +4,7 @@
     "slug": "Karbon",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon2.png",
+    "icon": "./assets/icon1.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash2.png",
@@ -19,7 +19,7 @@
       "package": "com.quantumquill.karbon",
       "googleServicesFile": "google-services.json",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
+        "foregroundImage": "./assets/icon1.png",
         "backgroundColor": "#ffffff"
       },
       "config": {

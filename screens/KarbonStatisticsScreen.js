@@ -125,7 +125,7 @@ const KarbonStatisticsScreen = (props) => {
       }
   
       // If the day has changed and is odd, use it as the label
-      const label = day !== previousDay ? `D${day}` : '';
+      const label = day !== previousDay ? `${day}` : '';
   
       // Sum values for the same day
       if (label in summedLogs) {
@@ -141,7 +141,7 @@ const KarbonStatisticsScreen = (props) => {
     const dailyLogs = Object.entries(summedLogs)
     .filter(([day, value]) => value > 0) // Only include days with a total value greater than 0
     .map(([day, value]) => ({
-      day: parseInt(day.slice(1)) % 3 === 1 ? day : '', // Only label odd days
+      day: day, // Only label odd days
       value: value.toFixed(2),
     }));
 
@@ -374,7 +374,7 @@ const KarbonStatisticsScreen = (props) => {
                   borderRadius: 16
                 },
                 propsForLabels: {
-                  fontSize: 8, 
+                  fontSize: 7, 
                 },
               }}
               style={{

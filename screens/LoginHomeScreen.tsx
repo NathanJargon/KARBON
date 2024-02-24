@@ -28,7 +28,6 @@ const HomeScreen = ({ navigation }: Props) => {
   return (
     <Background>
       <Logo />
-      <Header>KARBON</Header>
 
       <Paragraph>
         Register yourself and get started with helping Earth through Karbon!

@@ -149,7 +149,7 @@ function HomeScreen({ navigation }) {
 
       <View style={{ alignItems: 'center', padding: windowHeight * 0.035 }}>
         <Text style={styles.logoText}>Welcome to</Text>
-        <Text style={styles.logoTextBig}>KARBON</Text>
+        <Image source={require('../assets/realestlogo.png')} style={styles.logoImage} />
         <Text style={styles.subText1}>Your journey to a sustainable</Text>
         <Text style={styles.subText2}>tomorrow starts here.</Text>
       </View>
@@ -241,6 +241,13 @@ const windowHeight = Dimensions.get('window').height;
 
 
 const styles = StyleSheet.create({
+  logoImage: {
+    width: windowWidth * 0.5,
+    height: windowHeight * 0.5,
+    resizeMode: 'contain',
+    position: 'absolute', // add this line
+    top: -(windowHeight * 0.16), // add this line
+  },
   box1: {
     width: windowWidth * 0.40, // 35% of screen width
     height: windowHeight * 0.24, // 20% of screen height
@@ -319,7 +326,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat-Light',
     fontSize: 40,
     textAlign: 'center',
-    top: -windowHeight * 0.05, // Adjusted
+    top: -windowHeight * 0.065, // Adjusted
     color: 'white',
   },
   logoTextBig: {
@@ -333,14 +340,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat-Light',
     fontSize: 12,
     textAlign: 'center',
-    top: -windowHeight * 0.05, // Adjusted
+    top: windowHeight * 0.025, // Adjusted
     color: 'white',
   },
   subText2: {
     fontFamily: 'Montserrat-Light',
     fontSize: 12,
     textAlign: 'center',
-    top: -windowHeight * 0.05, // Adjusted
+    top: windowHeight * 0.025, // Adjusted
     color: 'white',
   },
   welcomeText: {

@@ -346,8 +346,11 @@ const KarbonMap = (props) => {
           resizeMode="cover"
           style={{ flex: 1, width: '100%' }}
         >
-          <View style={{ flex: 1, justifyContent: 'center' }}>
-            <Text style={styles.header}>KARBON MAP</Text>
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Image source={require('../assets/realestlogo.png')} style={styles.logoImage} />
+              <Text style={styles.header}>MAP</Text>
+            </View>
             <Text style={{ textAlign: 'center', color: 'white', fontSize: 12, fontFamily: 'Montserrat-Light', marginTop: -40 }}>Select the best route</Text>
             <Text style={{ textAlign: 'center', color: 'white', fontSize: 12, fontFamily: 'Montserrat-Light', marginTop: 5 }}>to reduce carbon emissions.</Text>
       
@@ -530,6 +533,14 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
+  logoImage: {
+    width: windowWidth * 0.35,
+    height: windowHeight * 0.35,
+    resizeMode: 'contain',
+    position: 'absolute', 
+    right: windowWidth * 0.15,
+  },
+
 buttonGlow: {
   flex: 1,
   flexDirection: 'row',
@@ -597,6 +608,7 @@ buttonGlow: {
     textAlign: 'center',
     padding: 30,
     color: 'white',
+    left: windowWidth * 0.17,
   },
   infoContainer: {
     position: 'absolute',

@@ -121,7 +121,7 @@ function KarbonCalculator() {
         style={{ flex: 1 }}
       >
       <Animated.View style={{ padding: 50, opacity: keyboardStatus ? 0 : 1 }}>
-        <Text style={styles.text1}>KARBON</Text>
+        <Image source={require('../assets/realestlogo.png')} style={styles.logoImage} />
         <Text style={styles.text21}>You have emitted a</Text>
         <Text style={styles.text22}>total of</Text>
         <Text style={styles.text3}>{carbonFootprint}</Text>
@@ -202,6 +202,15 @@ const windowHeight = Dimensions.get('window').height;
 
 
 const styles = StyleSheet.create({
+  logoImage: {
+    width: windowWidth * 0.5,
+    height: windowHeight * 0.5,
+    alignSelf: 'center',
+    resizeMode: 'contain',
+    position: 'absolute', // add this line
+    top: -(windowHeight * 0.16), // add this line
+  },
+
   buttonBackground: {
     flex: 1,
     flexDirection: 'row',
@@ -307,7 +316,7 @@ const styles = StyleSheet.create({
     paddingTop: 0,
   },
   text21: {
-    paddingTop: 10,
+    paddingTop: windowHeight * 0.075,
     fontSize: 25,
     color: 'white',
     textAlign: 'center',

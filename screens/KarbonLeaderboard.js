@@ -133,7 +133,13 @@ function KarbonLeaderboard() {
     return firstLetter + maskedPart + lastLetter;
   }
 
-
+  function maskProfile(profile, name, loggedInUser) {
+    const defaultProfile = require('../assets/rankingIcon.png'); // use require for local images
+    if (name === loggedInUser) {
+      return { uri: profile };
+    }
+    return defaultProfile;
+  }
 
   const CustomModal = ({ isVisible, closeModal, selectedUser }) => {
     // Check if selectedUser is not null and if user.profile is available, otherwise use a default profile icon
@@ -141,13 +147,10 @@ function KarbonLeaderboard() {
     const profileIconName = hasProfileIcon ? 'user' : selectedUser?.profile;
     const profileIconType = hasProfileIcon ? 'font-awesome' : 'custom'; // Replace with the actual icon type if using a different library
     
-    // Decide whether to render an Icon or an Image based on the type of profile
-    const profileComponent = hasProfileIcon ? (
-      <Image source={{ uri: selectedUser?.profile }} style={styles.profileImage1} />
-    ) : (
-      <Icon name={'user'} type={'font-awesome'} size={80} color="black" style={styles.profileIcon} />
+    const profileImage = maskProfile(selectedUser?.profile, selectedUser?.name, loggedInUserName);
+    const profileComponent = (
+      <Image source={profileImage} style={styles.profileImage1} />
     );
-  
     // console.log(selectedUser);
     
     const EmissionChart = ({ emissionLogs }) => {
@@ -259,16 +262,7 @@ function KarbonLeaderboard() {
       <View style={styles.rankContainer}>
       {topUsers.map((user, i) => (
         <ImageBackground source={require('../assets/nav7.png')} style={[styles.rankCard, i === 1 && styles.middleCard]} key={i}>
-      {user.profile && user.profile !== '' ? (
-        <Image source={{ uri: user.profile }} style={{ width: 40, height: 40, borderRadius: 10, marginTop: windowHeight * 0.02, }} />
-      ) : (
-        <Icon
-          name='user'
-          type='font-awesome'
-          size={40}
-          color='white'
-        />
-      )}
+        <Image source={maskProfile(user.profile, user.name, loggedInUserName)} style={{ width: 40, height: 40, borderRadius: 10, marginTop: windowHeight * 0.02, }} />
       <TouchableOpacity onPress={() => {
         setSelectedUser({
           ...user,
@@ -312,13 +306,7 @@ function KarbonLeaderboard() {
                   {item.email ? <Icon name='star' type='font-awesome' color='green'  size={20}  /> : null}
                 </View>
                 <View style={styles.iconStyle2}>
-                  {item.profile && item.profile !== '' ? (
-                    // If a profile exists and is not an empty string, display the profile image
-                    <Image source={{ uri: item.profile }} style={styles.profileImage} />
-                  ) : (
-                    // If no profile or an empty string, display the user icon
-                    <Icon name='user' type='font-awesome' color='#517fa4' size={40} />
-                  )}
+                  <Image source={maskProfile(item.profile, item.name, loggedInUserName)} style={styles.profileImage} />
                 </View>
               </View>
               <View style={styles.tableCell}>

@@ -211,7 +211,7 @@ function KarbonLeaderboard() {
             <Text style={styles.userName}>{maskName(selectedUser?.name)}</Text>
     
             <View style={styles.infoContainer}>
-              <Text style={styles.infoContent}>{selectedUser?.emission} kgCO2</Text>
+              <Text style={styles.infoContent}>{selectedUser?.emission} Co2E</Text>
             </View>
     
             {/* Add the line chart if emissionlogs is defined */}
@@ -279,7 +279,7 @@ function KarbonLeaderboard() {
           <Text style={styles.name}>{maskName(user.name)}</Text>
             {user.email ? <Icon name='star' type='font-awesome' color='green' size={10} style={{ margin: 2, top: -2 }} /> : null}
           </View>
-        <Text style={styles.emission}>{user.emission} kgCO2</Text>
+        <Text style={styles.emission}>{user.emission} Co2E</Text>
       </TouchableOpacity>
     </ImageBackground>
   ))}
@@ -311,7 +311,7 @@ function KarbonLeaderboard() {
               </View>
               <View style={styles.tableCell}>
                 <Text style={styles.tableBoxText1}>{maskName(item.name)}</Text>
-                <Text style={styles.tableBoxText2}>{item.emission} kgCO2</Text>
+                <Text style={styles.tableBoxText2}>{item.emission} Co2E</Text>
               </View>
               </View>
             </TouchableOpacity>

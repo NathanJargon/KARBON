@@ -474,7 +474,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Montserrat-Light',
     fontSize: 12,
-    paddingBottom: 10,
+    paddingBottom: windowWidth * 0.005,
     color: 'white',
   },
   header: {
@@ -494,18 +494,18 @@ const styles = StyleSheet.create({
     borderRadius: 20, 
     overflow: 'hidden',
     alignItems: 'center',
-    height: windowHeight * 0.20,
+    height: windowHeight * 0.185,
     marginHorizontal: windowWidth * 0.01, // 1% of window width
     width: windowWidth * 0.29, // 26% of window width
     top: windowHeight * 0.05,
   },
   middleCard: {
-    height: windowHeight * 0.24, // 25% of window height
+    height: windowHeight * 0.225, // 25% of window height
     top: windowHeight * 0.009,
   },
   rankText: {
     fontSize: 15,
-    marginTop: windowHeight * 0.02,
+    marginTop: windowHeight * 0.005,
     fontFamily: 'Codec',
     textAlign: 'center',
   },
@@ -530,7 +530,7 @@ const styles = StyleSheet.create({
   tableRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: windowHeight * 0.005, 
+    marginBottom: windowHeight * 0.002, 
     width: windowWidth * 1, // Adjust this value as needed
   },
   bottomBorder: {

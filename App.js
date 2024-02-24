@@ -57,6 +57,7 @@ function HomeStack() {
       <Stack.Screen name="HomeStack" component={HomeScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
       <Stack.Screen name="Calculator" component={KarbonCalculator} options={{ headerShown: false }} />
+      <Stack.Screen name="Karbon Leaderboard" component={KarbonLeaderboard} options={{ headerShown: false }}/>
       <Stack.Screen name="Details" component={KarbonStatistics} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
@@ -67,6 +68,7 @@ function HomeScreenStack() {
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Dashboard" component={HomeScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
+      <Stack.Screen name="Karbon Leaderboard" component={KarbonLeaderboard} options={{ headerShown: false }}/>
       <Stack.Screen name="Calculator" component={KarbonCalculator} options={{ headerShown: false }} />
       <Stack.Screen name="Statistics" component={KarbonStatistics} options={{ headerShown: false }} />
       <Stack.Screen name="Map" component={KarbonMap} options={{ headerShown: false }} />

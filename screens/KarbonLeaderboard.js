@@ -249,12 +249,15 @@ function KarbonLeaderboard() {
                     onPress={() => navigation.navigate('KarbonStatistics')}
                 />
             </View>
-        <View style={styles.headerContainer}>
-            <Text style={styles.header}>DAILY RANKINGS</Text>
+        <View style={styles.parentContainer}>
+          <View style={styles.headerContainer}>
+              <Text style={styles.header}>DAILY RANKING</Text>
+          </View>
         </View>
         </View>
       <View style={styles.headerBottomContainer}>
-        <Text style={styles.headerBottom1}>Aim to be ranked outside of the top 3!</Text>
+        <Text style={styles.headerBottom1}>Aim to be ranked</Text>
+        <Text style={styles.headerBottom12}>outside of the top 3!</Text>
         <Text style={styles.headerBottom2}>Your ranking depending on your carbon footprint emissions.</Text>
       </View>
 
@@ -416,14 +419,19 @@ const styles = StyleSheet.create({
 
 
 
-
+  parentContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   headerContainer: {
     borderRadius: 30,
     backgroundColor: 'rgba(255,255,255,0.9)',
     borderWidth: 2,
-    width: windowWidth * 0.8,
+    width: windowWidth * 0.6,
     padding: 10,
     marginTop: windowHeight * 0.04,
+    marginRight: windowWidth * 0.13,
     alignSelf: 'center',
   },
   iconContainer: {
@@ -447,12 +455,17 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   headerBottom1: {
-    fontStyle: 'italic',
     textAlign: 'center',
     fontFamily: 'Montserrat-Light',
     paddingTop: windowWidth * 0.02,
     fontSize: windowWidth * 0.05,
-    width: windowWidth * 0.65, // limit the width to 80% of the window width
+    alignSelf: 'center',
+    color: 'white',
+  },
+  headerBottom12: {
+    textAlign: 'center',
+    fontFamily: 'Montserrat-Light',
+    fontSize: windowWidth * 0.05,
     alignSelf: 'center',
     color: 'white',
   },
@@ -481,13 +494,13 @@ const styles = StyleSheet.create({
     borderRadius: 20, 
     overflow: 'hidden',
     alignItems: 'center',
-    height: windowHeight * 0.21,
+    height: windowHeight * 0.20,
     marginHorizontal: windowWidth * 0.01, // 1% of window width
     width: windowWidth * 0.29, // 26% of window width
     top: windowHeight * 0.05,
   },
   middleCard: {
-    height: windowHeight * 0.25, // 25% of window height
+    height: windowHeight * 0.24, // 25% of window height
     top: windowHeight * 0.009,
   },
   rankText: {

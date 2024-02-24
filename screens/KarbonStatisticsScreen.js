@@ -104,12 +104,11 @@ const KarbonStatisticsScreen = (props) => {
     // Sort logs by date in ascending order
     logs.sort((a, b) => new Date(a.day) - new Date(b.day));
   
-    // Keep only the last 7 days
+    // Keep only the logs of the current month
+    const currentMonth = new Date().getMonth();
     logs = logs.filter(log => {
       const date = new Date(log.day);
-      const sevenDaysAgo = new Date();
-      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 6);
-      return date >= sevenDaysAgo;
+      return date.getMonth() === currentMonth;
     });
   
     const summedLogs = {};
@@ -125,8 +124,8 @@ const KarbonStatisticsScreen = (props) => {
         continue;
       }
   
-      // If the day has changed, use it as the label
-      const label = day !== previousDay ? `Day ${day}` : '';
+      // If the day has changed and is odd, use it as the label
+      const label = day !== previousDay ? `D${day}` : '';
   
       // Sum values for the same day
       if (label in summedLogs) {
@@ -138,14 +137,17 @@ const KarbonStatisticsScreen = (props) => {
       // Update previousDay
       previousDay = day;
     }
-    
-    const dailyLogs = Object.entries(summedLogs).map(([day, value]) => ({
-      day,
+  
+    const dailyLogs = Object.entries(summedLogs)
+    .filter(([day, value]) => value > 0) // Only include days with a total value greater than 0
+    .map(([day, value]) => ({
+      day: parseInt(day.slice(1)) % 3 === 1 ? day : '', // Only label odd days
       value: value.toFixed(2),
     }));
-    
-    return dailyLogs;
+
+  return dailyLogs;
   }
+
   
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -370,7 +372,10 @@ const KarbonStatisticsScreen = (props) => {
                 color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                 style: {
                   borderRadius: 16
-                }
+                },
+                propsForLabels: {
+                  fontSize: 8, 
+                },
               }}
               style={{
                 borderRadius: 16,

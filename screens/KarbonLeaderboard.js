@@ -16,6 +16,7 @@ function KarbonLeaderboard() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Add this line
+  const [loggedInUserName, setLoggedInUserName] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,7 +24,6 @@ function KarbonLeaderboard() {
         setIsLoading(true); // Set loading to true when fetching starts
         const usersCollectionRef = collection(db, 'users');
         const querySnapshot = await getDocs(usersCollectionRef);
-
         const usersData = [];
         const currentDate = new Date();
         const currentYear = currentDate.getFullYear();
@@ -99,6 +99,42 @@ function KarbonLeaderboard() {
     return rank + "th";
   }
 
+
+  useEffect(() => {
+    const fetchLoggedInUser = async () => {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (user) {
+        const userDoc = doc(db, 'users', user.uid);
+        const userSnap = await getDoc(userDoc);
+        if (userSnap.exists()) {
+          const userName = userSnap.data().name || null;
+          setLoggedInUserName(userName);
+        }
+      }
+    };
+
+    fetchLoggedInUser();
+  }, []);
+
+  function maskName(name) {
+    if (name === loggedInUserName) {
+      return name;
+    }
+    if (typeof name !== 'string') {
+      return '';
+    }
+    if (name.length <= 2) {
+      return name;
+    }
+    const firstLetter = name[0];
+    const lastLetter = name[name.length - 1];
+    const maskedPart = '*'.repeat(name.length - 2);
+    return firstLetter + maskedPart + lastLetter;
+  }
+
+
+
   const CustomModal = ({ isVisible, closeModal, selectedUser }) => {
     // Check if selectedUser is not null and if user.profile is available, otherwise use a default profile icon
     const hasProfileIcon = selectedUser && selectedUser.profile && selectedUser.profile !== '';
@@ -118,16 +154,16 @@ function KarbonLeaderboard() {
       if (!emissionLogs || !Array.isArray(emissionLogs)) {
         return <Text>No emission data available</Text>;
       }
-
+  
       const data = [].concat(...emissionLogs.map(log => Number(log.value)));
       // console.log(data);
     
       const dataMin = Math.min(...data);
       const dataMax = Math.max(...data);
-
+  
       return (
         <View style={{ marginTop: -10, left: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-
+  
           <YAxis
             data={data}
             contentInset={{ top: 20, bottom: 20 }}
@@ -157,8 +193,7 @@ function KarbonLeaderboard() {
         </View>
       );
     };
-    
-
+  
     return (
       <Modal
         animationType="slide"
@@ -170,7 +205,7 @@ function KarbonLeaderboard() {
           <View style={styles.modalContent}>
             {profileComponent}
     
-            <Text style={styles.userName}>{selectedUser?.name}</Text>
+            <Text style={styles.userName}>{maskName(selectedUser?.name)}</Text>
     
             <View style={styles.infoContainer}>
               <Text style={styles.infoContent}>{selectedUser?.emission} kgCO2</Text>
@@ -190,7 +225,6 @@ function KarbonLeaderboard() {
       </Modal>
     );
   };
-
 
 
   return (
@@ -217,8 +251,8 @@ function KarbonLeaderboard() {
         </View>
         </View>
       <View style={styles.headerBottomContainer}>
-        <Text style={styles.headerBottom1}>Compete with your friends and get the highest</Text>
-        <Text style={styles.headerBottom2}>carbon footprint reduced in your circle!</Text>
+        <Text style={styles.headerBottom1}>Aim to be ranked outside of the top 3!</Text>
+        <Text style={styles.headerBottom2}>Your ranking depending on your carbon footprint emissions.</Text>
       </View>
 
       
@@ -248,7 +282,7 @@ function KarbonLeaderboard() {
       }}>
         <Text style={styles.rankText}>{getOrdinalSuffix(user.rank)}</Text>
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={styles.name}>{user.name}</Text>
+          <Text style={styles.name}>{maskName(user.name)}</Text>
             {user.email ? <Icon name='star' type='font-awesome' color='green' size={10} style={{ margin: 2, top: -2 }} /> : null}
           </View>
         <Text style={styles.emission}>{user.emission} kgCO2</Text>
@@ -288,7 +322,7 @@ function KarbonLeaderboard() {
                 </View>
               </View>
               <View style={styles.tableCell}>
-                <Text style={styles.tableBoxText1}>{item.name}</Text>
+                <Text style={styles.tableBoxText1}>{maskName(item.name)}</Text>
                 <Text style={styles.tableBoxText2}>{item.emission} kgCO2</Text>
               </View>
               </View>
@@ -428,8 +462,10 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     textAlign: 'center',
     fontFamily: 'Montserrat-Light',
-    paddingTop: 10,
-    fontSize: 12,
+    paddingTop: windowWidth * 0.02,
+    fontSize: windowWidth * 0.05,
+    width: windowWidth * 0.65, // limit the width to 80% of the window width
+    alignSelf: 'center',
     color: 'white',
   },
   headerBottom2: {

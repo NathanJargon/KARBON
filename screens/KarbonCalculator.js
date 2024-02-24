@@ -36,7 +36,7 @@ function KarbonCalculator() {
 
     const milesPerGallon = miles / gallons;
 
-    const totalCarbonFootprint = ((8.89 * Math.pow(10, -3)) / gallons) * (1 / milesPerGallon) * (1 / 0.993);
+    const totalCarbonFootprint = ((8.89 * Math.pow(10, -3))) * (1 / milesPerGallon) * (1 / 0.993);
     //console.log(totalCarbonFootprint);
     return totalCarbonFootprint.toFixed(3);
   };
